@@ -1,6 +1,4 @@
 using System;
-using System.Data;
-using System.Runtime.ExceptionServices;
 
 namespace _06_Garage_List;
 
@@ -86,25 +84,31 @@ public class Garage
         Data.RemoveAt(index);
     }
 
+    // public Vehicle? FindVehicleByRegistrationNumber(string registrationNumber, out int index)
+    // {
+    //     index = -1;
+    //     for (int i = 0; i < Data.Length; i++)
+    //     {
+    //         Vehicle? vehicle = Data[i];
+    //         if (
+    //             vehicle != null
+    //             && vehicle.RegistrationNumber.Equals(
+    //                 registrationNumber,
+    //                 StringComparison.OrdinalIgnoreCase
+    //             )
+    //         )
+    //         {
+    //             index = i;
+    //             return vehicle;
+    //         }
+    //     }
+    //     return null;
+    // }
+
     public Vehicle? FindVehicleByRegistrationNumber(string registrationNumber, out int index)
     {
-        index = -1;
-        for (int i = 0; i < Data.Length; i++)
-        {
-            Vehicle? vehicle = Data[i];
-            if (
-                vehicle != null
-                && vehicle.RegistrationNumber.Equals(
-                    registrationNumber,
-                    StringComparison.OrdinalIgnoreCase
-                )
-            )
-            {
-                index = i;
-                return vehicle;
-            }
-        }
-        return null;
+        index = Data.FindIndex(vehicle => vehicle.RegistrationNumber == registrationNumber);
+        return index <= 0 ? null : Data[index];
     }
 
     // Takes a string of search queries separated by spaces and formatted as key-value pairs.
