@@ -46,7 +46,7 @@ public class Garage
         {
             throw new InvalidOperationException("Error: No free space in the garage.");
         }
-        else if (FindVehicleByRegistrationNumber(vehicle.RegistrationNumber, out _) == null)
+        else if (FindVehicleByRegistrationNumber(vehicle.RegistrationNumber, out _) is null)
         {
             throw new InvalidOperationException(
                 "Error: Vehicle with that registration number already exists."
@@ -56,7 +56,7 @@ public class Garage
     }
 
     // Returns true if operation is successful and false if not
-    public bool RemoveVehicle(string registrationNumber)
+    /*public bool RemoveVehicle(string registrationNumber)
     {
         FindVehicleByRegistrationNumber(registrationNumber, out int index);
         if (index != -1)
@@ -68,6 +68,22 @@ public class Garage
         {
             return false;
         }
+    }*/
+
+    //Changed return type of RemoveVehicle() to be more consequential with AddVehicle()
+    public void RemoveVehicle(string registrationNumber)
+    {
+        if (string.IsNullOrWhiteSpace(registrationNumber))
+        {
+            throw new ArgumentException("Error: Registration number must be filled in.");
+        }
+        if (FindVehicleByRegistrationNumber(registrationNumber, out int index) == null)
+        {
+            throw new InvalidOperationException(
+                $"Error: Vehicle with registration number {registrationNumber} could not be found."
+            );
+        }
+        Data.RemoveAt(index);
     }
 
     public Vehicle? FindVehicleByRegistrationNumber(string registrationNumber, out int index)
