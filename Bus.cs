@@ -1,0 +1,14 @@
+using System;
+
+namespace _06_Garage_List;
+
+public class Bus : Vehicle
+{
+    public int NumberOfSeats { get; set; }
+
+    public Bus(string registrationNumber, string color, int numberOfWheels, int numberOfSeats)
+        : base(registrationNumber, color, numberOfWheels)
+    {
+        NumberOfSeats = numberOfSeats;
+    }
+}
