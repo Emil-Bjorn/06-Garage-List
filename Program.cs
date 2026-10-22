@@ -239,16 +239,7 @@ class Program
                     string? registrationNumber = Console.ReadLine();
                     if (registrationNumber != null && garage != null)
                     {
-                        if (garage.RemoveVehicle(registrationNumber))
-                        {
-                            Console.WriteLine("Vehicle successfully removed.");
-                        }
-                        else
-                        {
-                            Console.WriteLine(
-                                "Vehicle with provided registration number not found."
-                            );
-                        }
+                        garage.RemoveVehicle(registrationNumber);
                     }
                     else
                     {
