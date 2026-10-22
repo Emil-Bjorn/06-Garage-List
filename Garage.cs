@@ -6,13 +6,13 @@ namespace _06_Garage_List;
 
 public class Garage
 {
-    public Vehicle?[] Data { get; set; }
+    public List<Vehicle> Data { get; set; }
     public int Capacity { get; set; }
 
     public Garage(int capacity)
     {
         Capacity = capacity;
-        Data = new Vehicle[capacity];
+        Data = new List<Vehicle>(capacity);
     }
 
     public void AddVehicle(Vehicle vehicle)
