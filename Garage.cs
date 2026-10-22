@@ -44,7 +44,7 @@ public class Garage
         {
             throw new InvalidOperationException("Error: No free space in the garage.");
         }
-        else if (FindVehicleByRegistrationNumber(vehicle.RegistrationNumber, out _) is null)
+        else if (FindVehicleByRegistrationNumber(vehicle.RegistrationNumber, out _) is not null)
         {
             throw new InvalidOperationException(
                 "Error: Vehicle with that registration number already exists."
