@@ -15,7 +15,7 @@ public class Garage
         Data = new List<Vehicle>(capacity);
     }
 
-    public void AddVehicle(Vehicle vehicle)
+    /*public void AddVehicle(Vehicle vehicle)
     {
         // Find the first index in Data that is empty
         int emptyIndex = Array.IndexOf(Data, null);
@@ -37,6 +37,22 @@ public class Garage
         {
             throw new InvalidOperationException("Error: No free space in garage.");
         }
+    }*/
+
+    public void AddVehicle(Vehicle vehicle)
+    {
+        // Because Lists do not have a fixed size, the method must now check if Data.Count and Capacity are equal to see if the garage is full.
+        if (Data.Count == Capacity)
+        {
+            throw new InvalidOperationException("Error: No free space in the garage.");
+        }
+        else if (FindVehicleByRegistrationNumber(vehicle.RegistrationNumber, out _) == null)
+        {
+            throw new InvalidOperationException(
+                "Error: Vehicle with that registration number already exists."
+            );
+        }
+        Data.Add(vehicle);
     }
 
     // Returns true if operation is successful and false if not
