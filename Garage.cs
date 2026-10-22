@@ -77,7 +77,7 @@ public class Garage
         {
             throw new ArgumentException("Error: Registration number must be filled in.");
         }
-        if (FindVehicleByRegistrationNumber(registrationNumber, out int index) == null)
+        if (FindVehicleByRegistrationNumber(registrationNumber, out int index) is null)
         {
             throw new InvalidOperationException(
                 $"Error: Vehicle with registration number {registrationNumber} could not be found."
