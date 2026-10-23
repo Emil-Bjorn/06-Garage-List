@@ -142,7 +142,7 @@ public class Garage
                         break;
                 }
             }
-            if (isMatch is true)
+            if (isMatch)
             {
                 matches.Add(vehicle);
             }
