@@ -108,7 +108,7 @@ public class Garage
         foreach (Vehicle vehicle in Data)
         {
             var isMatch = true;
-            for (int i = 0; i < validatedSearchKeys.Count && isMatch is true; i++)
+            for (int i = 0; i < validatedSearchKeys.Count && isMatch; i++)
             {
                 switch (validatedSearchKeys[i])
                 {
