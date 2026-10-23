@@ -114,7 +114,7 @@ public class Garage
     // Takes a string of search queries separated by spaces and formatted as key-value pairs.
     // Loops through each vehicle in garage and each key-value search to identify if the vehicle is a match
     // If it is a match add it to a new array which is returned by the funciton.
-    public Vehicle[] Search(string search)
+    /*public Vehicle[] Search(string search)
     {
         string[] searchList = search.Split(' ', StringSplitOptions.RemoveEmptyEntries);
         string[] searchKeys = new string[searchList.Length];
@@ -207,5 +207,104 @@ public class Garage
         // Remove empty slots in searchMatches array
         Array.Resize(ref searchMatches, matchCount);
         return searchMatches;
+    }*/
+
+    private (List<string>, List<string>) ValidateSearchString(string search)
+    {
+        List<string> searchList = [.. search.Split(' ', StringSplitOptions.RemoveEmptyEntries)];
+        List<string> searchKeys = [];
+        List<string> searchValues = [];
+
+        foreach (string query in searchList)
+        {
+            // Search queries must include a dash that separates a search key and value
+            int dashIndex = query.IndexOf('-');
+            if (dashIndex <= 0 || dashIndex == query.Length - 1)
+            {
+                throw new ArgumentException(
+                    $"Invalid search '{query}'. Please use key-value format."
+                );
+            }
+
+            string searchKey = query.Substring(0, dashIndex);
+            string searchValue = query.Substring(dashIndex + 1);
+
+            switch (searchKey)
+            {
+                case "registration":
+                case "color":
+                case "type":
+                    break;
+                case "wheels":
+                    if (!int.TryParse(searchValue, out _))
+                    {
+                        throw new ArgumentException(
+                            "Error: Number of wheels must be a whole integer."
+                        );
+                    }
+                    break;
+                default:
+                    throw new ArgumentException(
+                        $"Error: Search key '{searchKey}' is not a valid key.'"
+                    );
+            }
+            searchKeys.Add(searchKey);
+            searchValues.Add(searchValue);
+        }
+        return (searchKeys, searchValues);
+    }
+
+    public List<Vehicle> Search(string search)
+    {
+        List<Vehicle> matches = [];
+        (List<string> validatedSearchKeys, List<string> validatedSearchValues) =
+            ValidateSearchString(search);
+        if (validatedSearchKeys.Count <= 0 && validatedSearchValues.Count <= 0)
+        {
+            throw new ArgumentException("Error: No valid search queries");
+        }
+        foreach (Vehicle vehicle in Data)
+        {
+            var isMatch = true;
+            for (int i = 0; i < validatedSearchKeys.Count && isMatch is true; i++)
+            {
+                switch (validatedSearchKeys[i])
+                {
+                    case "registration":
+                        isMatch = string.Equals(
+                            vehicle.RegistrationNumber,
+                            validatedSearchValues[i],
+                            StringComparison.OrdinalIgnoreCase
+                        );
+                        break;
+                    case "color":
+                        isMatch = string.Equals(
+                            vehicle.Color,
+                            validatedSearchValues[i],
+                            StringComparison.OrdinalIgnoreCase
+                        );
+                        break;
+                    case "type":
+                        isMatch = string.Equals(
+                            vehicle.GetType().Name,
+                            validatedSearchValues[i],
+                            StringComparison.OrdinalIgnoreCase
+                        );
+                        break;
+                    case "wheels":
+                        isMatch = string.Equals(
+                            vehicle.NumberOfWheels.ToString(),
+                            validatedSearchValues[i],
+                            StringComparison.OrdinalIgnoreCase
+                        );
+                        break;
+                }
+            }
+            if (isMatch is true)
+            {
+                matches.Add(vehicle);
+            }
+        }
+        return matches;
     }
 }
