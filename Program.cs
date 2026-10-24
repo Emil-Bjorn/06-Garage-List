@@ -237,9 +237,19 @@ class Program
                         "Please provide the registration number for the vehicle you would like to remove: "
                     );
                     string? registrationNumber = Console.ReadLine();
-                    if (registrationNumber != null && garage != null)
+                    if (!string.IsNullOrWhiteSpace(registrationNumber) && garage != null)
                     {
-                        garage.RemoveVehicle(registrationNumber);
+                        try
+                        {
+                            garage.RemoveVehicle(registrationNumber);
+                            Console.WriteLine(
+                                $"Vehicle '{registrationNumber}' succesfully removed."
+                            );
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine(ex.Message);
+                        }
                     }
                     else
                     {
