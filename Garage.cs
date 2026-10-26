@@ -47,7 +47,13 @@ public class Garage
 
     public Vehicle? FindVehicleByRegistrationNumber(string registrationNumber, out int index)
     {
-        index = Data.FindIndex(vehicle => vehicle.RegistrationNumber == registrationNumber);
+        index = Data.FindIndex(vehicle =>
+            string.Equals(
+                vehicle.RegistrationNumber,
+                registrationNumber,
+                StringComparison.OrdinalIgnoreCase
+            )
+        );
         return index < 0 ? null : Data[index];
     }
 
