@@ -205,16 +205,7 @@ class Program
                     break;
                 }
                 case "3":
-                    if (garage != null)
-                    {
-                        foreach (Vehicle? vehicle in garage.Data)
-                        {
-                            if (vehicle != null)
-                            {
-                                Console.WriteLine(vehicle);
-                            }
-                        }
-                    }
+                    Menu.ListVehicles(garage);
                     break;
                 case "4":
                 {

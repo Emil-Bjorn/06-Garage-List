@@ -30,4 +30,18 @@ public class Menu
             return null;
         }
     }
+
+    public static void ListVehicles(Garage? garage)
+    {
+        if (garage != null)
+        {
+            foreach (Vehicle? vehicle in garage.Data)
+            {
+                if (vehicle != null)
+                {
+                    Console.WriteLine(vehicle);
+                }
+            }
+        }
+    }
 }
