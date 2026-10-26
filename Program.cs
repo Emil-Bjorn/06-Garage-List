@@ -10,13 +10,7 @@ class Program
         Console.WriteLine("Hello, World!");
         while (running == true)
         {
-            Console.WriteLine("0. Exit application");
-            Console.WriteLine("1. Create new garage.");
-            Console.WriteLine("2. Add new vehicle");
-            Console.WriteLine("3. List all parked vehicles");
-            Console.WriteLine("4. Remove vehicle");
-            Console.WriteLine("5. Search for vehicle");
-            Console.Write("Please input a command: ");
+            Menu.printInstructions();
             string? cmd = Console.ReadLine();
             switch (cmd)
             {
