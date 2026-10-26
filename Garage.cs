@@ -4,7 +4,13 @@ namespace _06_Garage_List;
 
 public class Garage
 {
-    public List<Vehicle> Data { get; set; }
+    private List<Vehicle> _data;
+
+    public List<Vehicle> Data
+    {
+        get { return _data; }
+        set { _data = value; }
+    }
     public int Capacity { get; set; }
 
     public Garage(int capacity)
