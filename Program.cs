@@ -27,7 +27,7 @@ class Program
                 }
                 case "2":
                 {
-                    if (garage == null)
+                    /*if (garage == null)
                     {
                         Console.WriteLine("Error: Garage has not been initialized.");
                     }
@@ -201,7 +201,8 @@ class Program
                                 Console.WriteLine(ex.Message);
                             }
                         }
-                    }
+                    }*/
+                    Menu.AddVehicle(garage);
                     break;
                 }
                 case "3":
