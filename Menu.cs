@@ -179,7 +179,7 @@ public class Menu
                             break;
                     }
                 }
-                catch (InvalidOperationException ex)
+                catch (Exception ex) when (ex is ArgumentException or InvalidOperationException)
                 {
                     Console.WriteLine(ex.Message);
                 }

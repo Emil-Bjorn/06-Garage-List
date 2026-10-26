@@ -1,10 +1,26 @@
 using System;
+using System.Text.RegularExpressions;
 
 namespace _06_Garage_List;
 
 public class Vehicle
 {
-    public string RegistrationNumber { get; set; }
+    private string _registrationNumber;
+
+    public string RegistrationNumber
+    {
+        get { return _registrationNumber; }
+        set
+        {
+            if (!Regex.IsMatch(value, @"\A[A-Za-z]{3}[0-9]{3}\z"))
+            {
+                throw new ArgumentException(
+                    "Registration number must be three letters followed by 3 digits (ABC123)."
+                );
+            }
+            _registrationNumber = value;
+        }
+    }
     public string Color { get; set; }
     public int NumberOfWheels { get; set; }
 
