@@ -10,7 +10,7 @@ class Program
         Console.WriteLine("Hello, World!");
         while (running == true)
         {
-            Menu.printInstructions();
+            Menu.PrintInstructions();
             string? cmd = Console.ReadLine();
             switch (cmd)
             {
@@ -22,16 +22,7 @@ class Program
                 }
                 case "1":
                 {
-                    Console.Write("Please define garage size: ");
-                    if (int.TryParse(Console.ReadLine(), out int garageSize))
-                    {
-                        garage = new Garage(garageSize);
-                        Console.WriteLine("Garage created.");
-                    }
-                    else
-                    {
-                        Console.WriteLine("Garage size can only be whole integers.");
-                    }
+                    garage = Menu.CreateGarage();
                     break;
                 }
                 case "2":
