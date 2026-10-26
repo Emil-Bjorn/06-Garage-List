@@ -187,6 +187,32 @@ public class Menu
         }
     }
 
+    public static void RemoveVehicle(Garage? garage)
+    {
+        Console.Write(
+            "Please provide the registration number for the vehicle you would like to remove: "
+        );
+        string? registrationNumber = Console.ReadLine();
+        if (!string.IsNullOrWhiteSpace(registrationNumber) && garage != null)
+        {
+            try
+            {
+                garage.RemoveVehicle(registrationNumber);
+                Console.WriteLine($"Vehicle '{registrationNumber}' succesfully removed.");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+        else
+        {
+            Console.WriteLine(
+                "Error: Please ensure garage is initialized and registration number are provided correctly."
+            );
+        }
+    }
+
     public static void ListVehicles(Garage? garage)
     {
         if (garage != null)
@@ -198,6 +224,43 @@ public class Menu
                     Console.WriteLine(vehicle);
                 }
             }
+        }
+    }
+
+    public static void SearchVehicle(Garage? garage)
+    {
+        Console.WriteLine(
+            "To search for a vehicle, input a property followed by a dash and your search."
+        );
+        Console.WriteLine(
+            "You can use multiple properties together by separating them with a space."
+        );
+        Console.WriteLine("Ex. registration-abc123 color-red wheels-2 type-motorcycle");
+        Console.WriteLine("Please enter a search");
+        string? search = Console.ReadLine();
+        bool matchFound = false;
+        if (search != null && garage != null)
+        {
+            try
+            {
+                foreach (Vehicle vehicle in garage.Search(search))
+                {
+                    Console.WriteLine(vehicle);
+                    matchFound = true;
+                }
+            }
+            catch (ArgumentException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+        else
+        {
+            Console.WriteLine("Error: Ensure garage is initialized and search is not null");
+        }
+        if (matchFound == false)
+        {
+            Console.WriteLine("No matches found.");
         }
     }
 }
